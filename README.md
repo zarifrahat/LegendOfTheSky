@@ -34,7 +34,7 @@ In addition, this project will include:
 ## Architecture and Technology
 
 * /dist
-⋅⋅* main.js
+  * main.js
 * /src
 ⋅⋅* /images
 ⋅⋅⋅⋅* hero.png
