@@ -36,16 +36,16 @@ In addition, this project will include:
 * /dist
   * main.js
 * /src
-⋅⋅* /images
-⋅⋅⋅⋅* hero.png
-⋅⋅⋅⋅* villain.png
-⋅⋅⋅⋅* sky.png
-⋅⋅⋅⋅* music.mp3
-⋅⋅* /scripts
-⋅⋅⋅⋅* hero.js
-⋅⋅⋅⋅* villain.js
-⋅⋅* /styles
-⋅⋅* index.js
+  * /images
+   * hero.png
+   * villain.png
+   * sky.png
+   * music.mp3
+  * /scripts
+   * hero.js
+   * villain.js
+  * /styles
+  * index.js
 * Index.html
 
 
