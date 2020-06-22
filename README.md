@@ -37,13 +37,13 @@ In addition, this project will include:
   * main.js
 * /src
   * /images
-   * hero.png
-   * villain.png
-   * sky.png
-   * music.mp3
+    * hero.png
+    * villain.png
+    * sky.png
+    * music.mp3
   * /scripts
-   * hero.js
-   * villain.js
+    * hero.js
+     * villain.js
   * /styles
   * index.js
 * Index.html
