@@ -1,24 +1,34 @@
+import hero from '../images/hero.png'
+import Bullet from './bullet';
+
 class Hero {
-    constructor() {
+    constructor(ctx) {
+        this.ctx = ctx;
         this.x = 0;
         this.y = 100;
+        this.Height = 40;
+        this.Width = 56;
         this.speed = 2;
         this.turnRate = 0;
         this.drawHero = this.drawHero.bind(this);
         this.animate = this.animate.bind(this);
         this.move = this.move.bind(this);
+        this.shootBullet = this.shootBullet.bind(this);
         this.keysPressed = this.keysPressed.bind(this);
         this.keysUp = this.keysUp.bind(this);
         this.turnLeft = this.turnLeft.bind(this);
         this.turnRight = this.turnRight.bind(this);
+
+        this.bullets = [];
     }
 
     drawHero(){
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
-        const image = document.getElementById('source');
-        // console.log(image);
-        this.animateTurn(ctx, this.x, this.y, image)
+        // const image = document.getElementById('source');
+        const image = new Image();
+        image.onload = () => this.ctx.drawImage(image, this.x, this.y, 40, 56);
+
+        image.src = hero;
+        this.animateTurn(this.ctx, this.x, this.y, image)
 
 
     }
@@ -29,66 +39,57 @@ class Hero {
         ctx.translate(20, 28);
         ctx.rotate(this.turnRate * Math.PI / 180);
         ctx.translate(-20, -28);
-        ctx.drawImage(image, x, y, 40, 56);
+        ctx.drawImage(image, 0, 0, 40, 56);
         ctx.restore();
     }
 
     move(){
-        this.x += this.speed;
+        this.x += this.speed * Math.cos(this.turnRate * Math.PI / 180);
+        this.y += this.speed * Math.sin(this.turnRate * Math.PI / 180);
     }
 
     turnLeft(){
-        this.turnRate += -1;
+        this.turnRate += -6;
     }
 
     turnRight(){
-        this.turnRate += 1;
+        this.turnRate += 6;
 
     }
 
     keysPressed(e){
+        if (e.keyCode === 90) {
+            this.shootBullet();
+        }
+
         if (e.key == "Right" || e.key == "ArrowRight") {
             this.turnRight();
-        }
-        else if (e.key == "Left" || e.key == "ArrowLeft") {
+        }else if (e.key == "Left" || e.key == "ArrowLeft") {
             this.turnLeft();
         }
     } 
 
+    
     keysUp(e) {
         if (e.key == "Right" || e.key == "ArrowRight" || e.key == "Left" || e.key == "ArrowLeft"){
             this.turnRate = this.turnRate;
         }
     } 
-
-
+    
+    
     animate(){
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
-        ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-        ctx.fillStyle = 'green';
-        ctx.fillRect(0, 0, 1000, 600);
         this.drawHero();
         this.move();
-
-        if (this.x > canvas.height) {
-            this.x = 0;
-        }
-        if (this.y > canvas.width) {
-            this.y = 0;
-        }
-        if (this.x < 0) {
-            this.x = canvas.height;
-        }
-        if (this.y < 0) {
-            this.y = canvas.width;
-        }
         document.addEventListener("keydown", this.keysPressed);
         document.addEventListener("keyup", this.keysUp);
-
-        requestAnimationFrame(this.animate);
     }
+
+    shootBullet(){
+        let bullet = new Bullet(this.ctx, this.x, this.y, "Hero", this.turnRate, 0);
+        this.bullets.push(bullet);
+    }
+
+
 
 }
 

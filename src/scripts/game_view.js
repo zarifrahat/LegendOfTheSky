@@ -6,7 +6,7 @@ class GameView{
         this.img.onload = () => {
             this.ctx.drawImage(this.img, 0, 0);
         };
-        this.img.src = "asteroids.jpg";
+        this.img.src = "sky.jpg";
     }
 }
 
