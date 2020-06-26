@@ -1,13 +1,14 @@
 import bluebullet from '../images/blueshot.png'
+import redshot from '../images/redshot.png'
 
 class Bullet{
     constructor(ctx, x, y, shooter, turnRate, travelDistance){
         this.ctx = ctx;
         this.x = x;
         this.y = y;
-        this.Height = 4;
-        this.Width = 24;
-        this.speed = 5;
+        this.height = 4;
+        this.width = 24;
+        this.speed = 6;
         this.shooter = shooter;
         this.turnRate = turnRate;
         this.travelDistance = travelDistance;
@@ -21,7 +22,11 @@ class Bullet{
     drawBullet(){
         const image = new Image();
         image.onload = () => this.ctx.drawImage(image, this.x, this.y, 24, 4);
-        image.src = bluebullet;
+        if(this.shooter === "Hero"){
+            image.src = bluebullet;
+        } else {
+            image.src = redshot;
+        }
         // this.ctx.drawImage(image, this.x, this.y, 24, 4);
         this.animateTurn(this.ctx, this.x, this.y, image)
 

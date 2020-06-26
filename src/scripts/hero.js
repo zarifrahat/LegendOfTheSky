@@ -6,8 +6,10 @@ class Hero {
         this.ctx = ctx;
         this.x = 0;
         this.y = 100;
-        this.Height = 40;
-        this.Width = 56;
+        this.height = 40;
+        this.width = 56;
+        this.health = 100;
+        this.armor = 0;
         this.speed = 2;
         this.turnRate = 0;
         this.drawHero = this.drawHero.bind(this);
@@ -88,9 +90,6 @@ class Hero {
         let bullet = new Bullet(this.ctx, this.x, this.y, "Hero", this.turnRate, 0);
         this.bullets.push(bullet);
     }
-
-
-
 }
 
 

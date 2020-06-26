@@ -1,5 +1,7 @@
 import "./styles/index.scss";
-import sky from './images/sky.jpg'
+import sky from './images/sky.jpg';
+import bluebullet from './images/blueshot.png';
+import redshot from '../images/redshot.png'
 import Hero from './scripts/hero';
 import Bullet from './scripts/bullet';
 import Game from './scripts/game';
@@ -19,16 +21,18 @@ const canvasCtx = document.addEventListener('DOMContentLoaded', () => {
     const ctx = canvas.getContext('2d');
 
     let game1 = new Game(ctx);
-    // game1.animate();
+            // game1.animate();
 
-    // let player = new Hero(ctx);
-    // // player.drawHero();
-    // player.animate();
+    let didGameStart = false;
+    function EnterPressed(e){
+        if (e.keyCode === 13 && !didGameStart){
+            didGameStart = true;
+            game1.animate();
+        }
+    }
 
-    // let bullet = new Bullet(ctx, 0, 0, "hero", 0);
-    // bullet.animate();
+    document.addEventListener("keydown", EnterPressed);
 
-    
 });
 
 
