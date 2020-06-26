@@ -1,7 +1,7 @@
 import "./styles/index.scss";
 import sky from './images/sky.jpg';
 import bluebullet from './images/blueshot.png';
-import redshot from '../images/redshot.png'
+import redshot from './images/redshot.png'
 import Hero from './scripts/hero';
 import Bullet from './scripts/bullet';
 import Game from './scripts/game';

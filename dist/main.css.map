@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./src/styles/index.scss"],"names":[],"mappings":"AAAA,QAAQ,uBAAuB,kBAAkB,UAAU,SAAS,UAAU,kBAAkB,uBAAuB,kBAAkB,UAAU,SAAS","file":"main.css","sourcesContent":["#canvas{border:1px solid black;position:absolute;left:auto;top:auto;z-index:2}#canvasBackground{border:1px solid black;position:absolute;left:auto;top:auto;z-index:1}\n"],"sourceRoot":""}
