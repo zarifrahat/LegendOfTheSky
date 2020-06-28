@@ -4,8 +4,10 @@ import Armor from './armor';
 import Villain from './villain';
 
 class Game {
-    constructor(ctx){
+    constructor(ctx, mode, ctxInfo){
         this.ctx = ctx;
+        this.ctxInfo = ctxInfo;
+        this.mode = mode;
         this.x = 1200;
         this.y = 600;
         this.hero = new Hero(ctx);
@@ -13,7 +15,9 @@ class Game {
         this.bullets = this.hero.bullets;
         this.villainbullets = [];
         this.armors = [];
+        this.armorCount = 5;
         this.villains = [];
+        this.villainCount = 5;
         this.animate = this.animate.bind(this);
         this.allObjects = this.allObjects.bind(this);
         this.addBullets = this.addBullets.bind(this);
@@ -27,9 +31,24 @@ class Game {
         this.checkHeroCollision = this.checkHeroCollision.bind(this);
         this.checkVillainBulletCollision = this.checkVillainBulletCollision.bind(this);
         this.spottedHero = this.spottedHero.bind(this);
-
+        this.changeDifficulty = this.changeDifficulty.bind(this);
+        
         this.createArmors();
         this.createVillains();
+    }
+
+    changeDifficulty(difficulty){
+        // console.log(difficulty)
+        if (difficulty === 2 ){
+            this.villainCount = 5;
+            // console.log(this.villainCount)
+            this.createVillains();
+
+        } else if (difficulty === 3 ){
+            this.villainCount = 10;
+            this.createArmors();
+            this.createVillains();
+        } 
     }
 
     allObjects(){
@@ -52,12 +71,12 @@ class Game {
         })
     }
     removeBullets() {
-        this.bullets = this.bullets.filter(bullet => bullet.travelDistance < 75);
-        this.villainbullets = this.villainbullets.filter(bullet => bullet.travelDistance < 75);
+        this.bullets = this.bullets.filter(bullet => bullet.travelDistance < 750);
+        this.villainbullets = this.villainbullets.filter(bullet => bullet.travelDistance < 750);
     }
 
     createArmors(){
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < this.armorCount; i++) {
             let armor = new Armor(this.ctx);
             this.armors.push(armor);
 
@@ -65,7 +84,8 @@ class Game {
     }
 
     createVillains(){
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < this.villainCount; i++) {
+            // console.log(this.villainCount)
             let villain = new Villain(this.ctx, this.hero.x, this.hero.y);
             this.villains.push(villain);
 
@@ -103,7 +123,29 @@ class Game {
                     this.bullets.splice(index, 1);
                     this.villains.splice(index2, 1);
                 }
+            }
         }
+    }
+    checkHeroBulletCollision(){
+        for (let index = 0; index < this.villainbullets.length; index++) {
+            let villainBulletObject = this.villainbullets[index];
+            if (this.checkBulletCollision(this.hero, villainBulletObject)) {
+                this.villainbullets.splice(index, 1);
+                if(this.hero.armor > 0){
+                    this.hero.armor -= 10;
+                } else {
+                    this.hero.health -= 10;
+                }
+            }
+        }
+    }
+
+    checkHeroToVillainCollision(){
+        for (let index = 0; index < this.villains.length; index++) {
+            let villainObject = this.villains[index];
+            if (this.checkCollision(this.hero, villainObject)) {
+                console.log("HERO IS DEAD")
+            }
         }
     }
 
@@ -121,14 +163,24 @@ class Game {
             }
         }
     }
+
+    showHeroHealthAndArmor(){
+        this.ctxInfo.font = "20px Arial";
+        this.ctxInfo.fillStyle = "white";
+        this.ctxInfo.fillText(`${this.hero.health}`, 85, 25);
+        this.ctxInfo.fillText(`${this.hero.armor}`, 85, 85);
+    }
     
     animate(){
         this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+        this.ctxInfo.clearRect(75, 0, 150, 120);
         this.addBullets();
         this.updateVillainBulletsOnScreen();
         this.removeBullets();
         this.checkHeroCollision();
+        this.checkHeroToVillainCollision();
         this.checkVillainBulletCollision();
+        this.checkHeroBulletCollision();
         this.spottedHero();
         // console.log(this.allObjects());
         this.allObjects().forEach(object =>{
@@ -146,6 +198,7 @@ class Game {
                 object.y = canvas.height;
             }
         }) 
+        this.showHeroHealthAndArmor();
         requestAnimationFrame(this.animate);
     }
 

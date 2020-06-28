@@ -5,11 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./dist/main.js" type="text/javascript"></script>
     <link rel="stylesheet" href="./dist/main.css" />
-    <title>Legend of the Sky</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat&family=Marck+Script&display=swap" rel="stylesheet">
+<title>Legend of the Sky</title>
 </head>
-<body>
-    <h3>Press Enter to play, Z to Shoot, LEFTKEY to TURN LEFT, RIGHTKEY to TURN RIGHT</h3>
-    <canvas id="canvas" width="1200" height="600"></canvas>
-    <canvas id="canvasBackground" width="1200" height="600"></canvas>
+<body style="background-image: url(./src/images/background.jpg); background-size:cover;">
+    <header>
+        <audio id="gameMusic" src="./src/images/David_Hilowitz_-_Equilibrium_I_Cello_version.mp3"></audio>
+        <div class="header-left">
+            <a href="https://zarifrahat.github.io/"><img src="./src/images/home.png" alt="Home" height="40" width="40"></a>
+            
+        </div>
+        <div class="header-right">
+            <img id="soundon" src="./src/images/soundon.png" alt="Sound On" height="40" width="40">
+            <img id="soundoff" src="./src/images/soundoff.png" alt="Sound Off" height="40" width="40">
+            <a href="https://github.com/zarifrahat"><img src="./src/images/github.png" alt="Github" height="40" width="40"></a> 
+            <img src="./src/images/linkedin.png" alt="LinkedIn" height="40" width="40">
+        </div>
+    </header>
+        <div id="prologue">
+            <h1>Legend of the Sky</h1>
+            <p>
+                Mother: "What bedtime story do you want to hear tonight sweetie."<br>
+                Child: "My favorite one! About the legend in the sky!"<br>
+                Mother: "Okay, but only if you brushed your teeth like you were supposed to."<br>
+                Child: "Mooooom! I did!"<br>
+                Mother: "Now where do I start..."<br>
+                Child: "On the third year of the great war..."<br>
+                Mother: "Oh yes, thats how your dad usually starts it, isn't that right? Well, on the third year of the greatest war, a brave squadron flew behind enemy lines to gather intelligence. The journey
+                inward was easy, suspiciously easy. However, any gut feelings of suspicion were quickly dismissed to ensure a
+                successful stealth mission. When the information was gathered and our brave men and women began to fly back, they were
+                ambushed. During the hardfought battle in the sky, our planes were hit again and again. One by one they plummeted in
+                brilliant explosions of red, orange, and black against the cold, blue, and white sky. One after another they fell, until
+                there was but one left. And what happened after that is the stuff of myths and legends..."<br>
+
+            </p>
+            <a href="#" class="button play">PLAY</a>
+        </div>
+       <div id="menu">
+           <h1>Legend of the Sky</h1>
+           <ul>
+               <li><a href="#" class="button easy">EASY</a></li>
+               <li><a href="#" class="button medium">MEDIUM</a></li>
+               <li><a href="#" class="button hard">HARD</a></li>
+           </ul>
+      </div>
+      <canvas id="canvasLeft" width="150" height="600"></canvas>
+       <canvas id="canvas" width="1100" height="600"></canvas>
+       <canvas id="canvasBackground" width="1100" height="600"></canvas>
+
 </body>
 </html>

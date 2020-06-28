@@ -1,4 +1,4 @@
-#canvas{border:1px solid black;position:absolute;left:auto;top:auto;z-index:2}#canvasBackground{border:1px solid black;position:absolute;left:auto;top:auto;z-index:1}
+body{background-image:url(src/images/background.jpg)}#canvas{border:1px solid black;position:absolute;left:auto;top:auto;z-index:2}#canvasBackground{border:1px solid black;position:absolute;left:auto;top:auto;z-index:1}#menu{box-sizing:border-box;display:none;height:600px;width:1200px;overflow:auto;margin:auto;position:absolute;left:auto;top:auto;z-index:3}h1{box-sizing:border-box;color:red}.button{box-sizing:border-box;display:block;width:200px;margin:auto;height:50px;border:1px solid black;color:red;font-weight:bold;background-color:green;border-radius:4px}li{list-style-type:none}
 
 
 /*# sourceMappingURL=main.css.map*/
