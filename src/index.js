@@ -94,6 +94,7 @@ const canvasCtx = document.addEventListener('DOMContentLoaded', () => {
 
     });
 
+    console.log("END OF LOOP")
 
 });
 

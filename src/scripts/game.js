@@ -213,6 +213,7 @@ class Game {
         this.checkHeroBulletCollision();
         this.spottedHero();
         this.updateVillainBulletsOnScreen();
+        this.removeBullets();
         // console.log(this.allObjects());
         this.allObjects().forEach(object =>{
             object.animate();
