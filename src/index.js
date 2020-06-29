@@ -24,6 +24,9 @@ const canvasCtx = document.addEventListener('DOMContentLoaded', () => {
     const menu = document.getElementById('menu');
     const prologue = document.getElementById('prologue');
     const gamelost = document.getElementById('gamelost');
+    const gamewon = document.getElementById('gamewon');
+    const credits = document.getElementById('credits');
+
 
     function hideMenu(element){
         element.style.display = "none";
@@ -47,26 +50,40 @@ const canvasCtx = document.addEventListener('DOMContentLoaded', () => {
         hideMenu(prologue);
         showMenu(menu);
     });
+    document.querySelectorAll('.restart')[0].addEventListener('click', ()=>{
+        hideMenu(gamelost);
+        hideMenu(gamewon);
+        showMenu(menu);
+    });
+    document.querySelectorAll('.restart')[1].addEventListener('click', ()=>{
+        hideMenu(gamelost);
+        hideMenu(gamewon);
+        showMenu(menu);
+    });
+    document.querySelectorAll('.restart')[2].addEventListener('click', ()=>{
+        hideMenu(credits);
+        showMenu(menu);
+    });
+    document.querySelectorAll('.credits')[0].addEventListener('click', ()=>{
+        hideMenu(gamelost);
+        hideMenu(gamewon);
+        showMenu(credits);
+    });
     document.querySelectorAll('.easy')[0].addEventListener('click', ()=>{
         let easyGame = new Game(ctx, 1, ctxInfo);
         hideMenu(menu);
- 
-        if(easyGame.animate() === "done"){
-            if (easyGame.gameLost){
-            showMenu(gamelost)
-            console.log("game LOST")
-            } else if(easyGame.gameWon){
-            console.log("game WON")
-            
-            }
-        }
+   
+        easyGame.animate()
    
         if(isAudioOn){
             const music = document.getElementById("gameMusic");
             music.loop = true;
+            music.load(); 
             music.play(); 
         }
+        console.log("END OF LOOP")
 
+   
     });
     document.querySelectorAll('.medium')[0].addEventListener('click', ()=>{
         let mediumGame = new Game(ctx, 2, ctxInfo);
@@ -77,7 +94,8 @@ const canvasCtx = document.addEventListener('DOMContentLoaded', () => {
         if (isAudioOn) {
             const music = document.getElementById("gameMusic");
             music.loop = true;
-            music.play();
+            music.load();
+            music.play(); 
         }
 
     });
@@ -89,12 +107,12 @@ const canvasCtx = document.addEventListener('DOMContentLoaded', () => {
         if (isAudioOn) {
             const music = document.getElementById("gameMusic");
             music.loop = true;
-            music.play();
+            music.load();
+            music.play(); 
         }
 
     });
 
-    console.log("END OF LOOP")
 
 });
 

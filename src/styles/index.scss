@@ -19,7 +19,7 @@ img{
     top:auto;
     z-index: 1;
 }
-#menu, #prologue, #gamelost{
+#menu, #prologue, #gamelost, #gamewon, #credits{
     box-sizing: border-box;
     display: none;
     height: 600px;
@@ -30,7 +30,8 @@ img{
     left: 160px;
     top:auto;
     z-index: 3;
-
+    background-color: white;
+    opacity: 0.65;
 
 }
 h1{
@@ -38,9 +39,11 @@ h1{
     font-size: 46px;
     box-sizing: border-box;
     color: #B80C09;
+    margin-left: 375px;
+
 }
 
-p{
+p, h3{
     font-family: 'Caveat', cursive;
     font-size: 25px;
     color: #0B4F6C;
@@ -69,17 +72,10 @@ li{
     display: flex;
     flex-direction: column;
 
+
 }
 
-#prologue h1{
-    margin-left: 375px;
-}
-#menu h1{
-    margin-left: 375px;
-}
-#menu h1{
-    margin-left: 375px;
-}
+
 #prologue p{
     margin-left: 20px;
 }
@@ -91,3 +87,13 @@ li{
     display: none;
 }
 
+#gamelost h3{
+    margin-left: 375px;
+
+}
+#gamewon h3{
+    margin-left: 320px;
+}
+#credits h3{
+    margin-left: 180px;
+}

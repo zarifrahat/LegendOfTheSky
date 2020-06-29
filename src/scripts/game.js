@@ -10,7 +10,7 @@ class Game {
         this.mode = mode;
         this.gameWon = false;
         this.gameLost = false;
-        this.x = 1200;
+        this.x = 1100;
         this.y = 600;
         this.hero = new Hero(ctx);
         this.bullet = new Bullet(ctx, 0, 10, "hero", 0);
@@ -196,9 +196,15 @@ class Game {
         }
     }
     
-        restartGame(){
-            this.ctx.clearRect(0, 0, canvas.width, canvas.height);
-        }
+    restartGame(){
+        this.ctx.clearRect(0, 0, 1100, 600);
+    }
+    hideMenu(element) {
+        element.style.display = "none";
+    }
+    showMenu(element) {
+        element.style.display = "block";
+    }
     
     animate(){
         this.ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -231,9 +237,18 @@ class Game {
             }
         }) 
         this.showHeroHealthAndArmor();
-        if(this.gameLost || this.gameWon){
+        if(this.gameLost){
             this.restartGame();
-            return "done"
+            const gamelost = document.getElementById('gamelost');
+            this.showMenu(gamelost);
+            const music = document.getElementById("gameMusic");
+            music.pause(); 
+        } else if(this.gameWon){
+            this.restartGame();
+            const gamewon = document.getElementById('gamewon');
+            this.showMenu(gamewon);
+            const music = document.getElementById("gameMusic");
+            music.pause(); 
         } else {
             requestAnimationFrame(this.animate);
         }
