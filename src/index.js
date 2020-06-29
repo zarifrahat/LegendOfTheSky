@@ -46,6 +46,21 @@ const canvasCtx = document.addEventListener('DOMContentLoaded', () => {
 
     // let game1 = new Game(ctx);
     showMenu(prologue);
+    document.getElementById('soundon').addEventListener('click', () => {
+        isAudioOn = false;
+        const music = document.getElementById("gameMusic");
+        music.pause();
+        hideSoundButton(soundONIcon);
+        showSoundButton(soundOFFIcon);
+    });
+    document.getElementById('soundoff').addEventListener('click', () => {
+        isAudioOn = true;
+        const music = document.getElementById("gameMusic");
+        music.load();
+        music.play();
+        hideSoundButton(soundOFFIcon);
+        showSoundButton(soundONIcon);
+    });
     document.querySelectorAll('.play')[0].addEventListener('click', ()=>{
         hideMenu(prologue);
         showMenu(menu);
