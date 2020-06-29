@@ -75,8 +75,34 @@ class Game {
         })
     }
     removeBullets() {
-        this.bullets = this.bullets.filter(bullet => bullet.travelDistance < 75);
-        this.villainbullets = this.villainbullets.filter(bullet => bullet.travelDistance < 75);
+        // this.bullets = this.bullets.filter(bullet => bullet.travelDistance < 75);
+        // this.villainbullets = this.villainbullets.filter(bullet => bullet.travelDistance < 75);
+        this.removeHeroBullets();
+        this.removeVillainBullets();
+    }
+    removeHeroBullets(){
+        for (let index = 0; index < this.hero.bullets.length; index++) {
+            let bulletObject = this.hero.bullets[index];
+            if (bulletObject.travelDistance > 75){
+                this.hero.bullets.splice(index, 1)
+            }
+        }
+        this.bullets = this.hero.bullets;
+    }
+
+    removeVillainBullets(){
+        let newVillainBullets = [];
+        for (let index = 0; index < this.villains.length; index++) {
+            let villainObject = this.villains[index];
+            for (let index2 = 0; index2 < villainObject.bullets.length; index2++) {
+                let villainBulletObject = villainObject.bullets[index2];
+                if (villainBulletObject.travelDistance > 75) {
+                    villainObject.bullets.splice(index2, 1);
+                }
+            }
+            newVillainBullets.concat(villainObject.bullets);
+        }
+        this.villainbullets = newVillainBullets;
     }
 
     createArmors(){
@@ -165,7 +191,7 @@ class Game {
     spottedHero() {
         for (let index = 0; index < this.villains.length; index++) {
             const villain = this.villains[index];
-            if (villain.isHeroSpotted(villain.herox, villain.heroy, villain)) {
+            if (villain.isHeroSpotted(this.hero.x, this.hero.y)) {
                 // console.log("HERO SPOTTED")
                 villain.aggroFlying();
 

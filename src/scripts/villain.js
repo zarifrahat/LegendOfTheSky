@@ -61,6 +61,7 @@ class Villain{
         if(this.travelDistance === 100){
             this.turnRate +=  (Math.random() < 0.5 ? -1 : 1) * 7;
             this.travelDistance = 0;
+            // this.shootBullet();
         }
     }
 
@@ -77,7 +78,7 @@ class Villain{
 
     isHeroSpotted(herox, heroy) {
         const actualDistance = Math.sqrt((herox - this.x) ** 2 + (heroy - this.y) ** 2);
-        const allowedDistance = 300;
+        const allowedDistance = 500;
         return (actualDistance < allowedDistance);
     }
 
