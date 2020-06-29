@@ -23,6 +23,7 @@ const canvasCtx = document.addEventListener('DOMContentLoaded', () => {
     const ctx = canvas.getContext('2d');
     const menu = document.getElementById('menu');
     const prologue = document.getElementById('prologue');
+    const gamelost = document.getElementById('gamelost');
 
     function hideMenu(element){
         element.style.display = "none";
@@ -48,9 +49,18 @@ const canvasCtx = document.addEventListener('DOMContentLoaded', () => {
     });
     document.querySelectorAll('.easy')[0].addEventListener('click', ()=>{
         let easyGame = new Game(ctx, 1, ctxInfo);
-
         hideMenu(menu);
-        easyGame.animate();
+ 
+        if(easyGame.animate() === "done"){
+            if (easyGame.gameLost){
+            showMenu(gamelost)
+            console.log("game LOST")
+            } else if(easyGame.gameWon){
+            console.log("game WON")
+            
+            }
+        }
+   
         if(isAudioOn){
             const music = document.getElementById("gameMusic");
             music.loop = true;
@@ -83,6 +93,8 @@ const canvasCtx = document.addEventListener('DOMContentLoaded', () => {
         }
 
     });
+
+
 });
 
 

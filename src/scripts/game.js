@@ -8,6 +8,8 @@ class Game {
         this.ctx = ctx;
         this.ctxInfo = ctxInfo;
         this.mode = mode;
+        this.gameWon = false;
+        this.gameLost = false;
         this.x = 1200;
         this.y = 600;
         this.hero = new Hero(ctx);
@@ -32,6 +34,8 @@ class Game {
         this.checkVillainBulletCollision = this.checkVillainBulletCollision.bind(this);
         this.spottedHero = this.spottedHero.bind(this);
         this.changeDifficulty = this.changeDifficulty.bind(this);
+        this.gameLostChecker = this.gameLostChecker.bind(this);
+        this.gameWonChecker = this.gameWonChecker.bind(this);
         
         this.createArmors();
         this.createVillains();
@@ -120,31 +124,40 @@ class Game {
             for (let index2 = 0; index2 < this.villains.length; index2++) {
                 let villainObject = this.villains[index2];
                 if (this.checkBulletCollision(villainObject, bulletObject)) {
-                    this.bullets.splice(index, 1);
+                    this.bullets = this.hero.bullets.splice(index, 1);
                     this.villains.splice(index2, 1);
                 }
             }
         }
     }
     checkHeroBulletCollision(){
-        for (let index = 0; index < this.villainbullets.length; index++) {
-            let villainBulletObject = this.villainbullets[index];
-            if (this.checkBulletCollision(this.hero, villainBulletObject)) {
-                this.villainbullets.splice(index, 1);
-                if(this.hero.armor > 0){
-                    this.hero.armor -= 10;
-                } else {
-                    this.hero.health -= 10;
+        let newVillainBullets = [];
+        for (let index = 0; index < this.villains.length; index++) {
+            let villainObject = this.villains[index];
+            for (let index2 = 0; index2 < villainObject.bullets.length; index2++) {
+                let villainBulletObject = villainObject.bullets[index2];
+                if (this.checkBulletCollision(this.hero, villainBulletObject)) {
+                    villainObject.bullets.splice(index2, 1);
+                    if(this.hero.armor > 0){
+                        this.hero.armor -= 10;
+                    } else {
+                        this.hero.health -= 10;
+                    }
                 }
+                
             }
+            newVillainBullets.concat(villainObject.bullets);
         }
+        this.villainbullets = newVillainBullets;
+        // console.log(this.villainbullets)
     }
 
     checkHeroToVillainCollision(){
         for (let index = 0; index < this.villains.length; index++) {
             let villainObject = this.villains[index];
             if (this.checkCollision(this.hero, villainObject)) {
-                console.log("HERO IS DEAD")
+                this.hero.armor = 0;
+                this.hero.health = 0;
             }
         }
     }
@@ -170,18 +183,36 @@ class Game {
         this.ctxInfo.fillText(`${this.hero.health}`, 85, 25);
         this.ctxInfo.fillText(`${this.hero.armor}`, 85, 85);
     }
+
+    gameWonChecker(){
+        if(this.villains.length === 0){
+            this.gameWon = true;
+        }
+    }
+    gameLostChecker(){
+        if(this.hero.health <= 0){
+            this.gameLost = true;
+            // console.log("GAME LOST!")
+        }
+    }
+    
+        restartGame(){
+            this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
     
     animate(){
         this.ctx.clearRect(0, 0, canvas.width, canvas.height);
         this.ctxInfo.clearRect(75, 0, 150, 120);
+        this.gameLostChecker();
+        this.gameWonChecker();
         this.addBullets();
-        this.updateVillainBulletsOnScreen();
         this.removeBullets();
         this.checkHeroCollision();
         this.checkHeroToVillainCollision();
         this.checkVillainBulletCollision();
         this.checkHeroBulletCollision();
         this.spottedHero();
+        this.updateVillainBulletsOnScreen();
         // console.log(this.allObjects());
         this.allObjects().forEach(object =>{
             object.animate();
@@ -199,11 +230,12 @@ class Game {
             }
         }) 
         this.showHeroHealthAndArmor();
-        requestAnimationFrame(this.animate);
-    }
-
-    restartGame(){
-        this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+        if(this.gameLost || this.gameWon){
+            this.restartGame();
+            return "done"
+        } else {
+            requestAnimationFrame(this.animate);
+        }
     }
 }
 
