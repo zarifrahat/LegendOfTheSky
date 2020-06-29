@@ -75,8 +75,8 @@ class Game {
         })
     }
     removeBullets() {
-        this.bullets = this.bullets.filter(bullet => bullet.travelDistance < 750);
-        this.villainbullets = this.villainbullets.filter(bullet => bullet.travelDistance < 750);
+        this.bullets = this.bullets.filter(bullet => bullet.travelDistance < 75);
+        this.villainbullets = this.villainbullets.filter(bullet => bullet.travelDistance < 75);
     }
 
     createArmors(){

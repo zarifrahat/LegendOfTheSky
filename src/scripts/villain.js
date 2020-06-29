@@ -82,7 +82,7 @@ class Villain{
     }
 
     shootBullet() {
-        if(this.bullets.length < 20){
+        if(this.bullets.length < 4){
             let bullet = new Bullet(this.ctx, this.x, this.y, "Villain", this.turnRate, 0);
             this.bullets.push(bullet);
         }
