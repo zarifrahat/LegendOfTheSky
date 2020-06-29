@@ -9,7 +9,7 @@ class Villain{
         this.heroy = heroy;
         this.height = 63;
         this.width = 46;
-        this.x = Math.floor((Math.random() * 1000) + 200);
+        this.x = Math.floor((Math.random() * 800) + 200);
         this.y = Math.floor((Math.random() * 600));
         this.speed = 1.8;
         this.travelDistance = 0;
