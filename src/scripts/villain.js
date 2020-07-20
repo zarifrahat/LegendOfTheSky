@@ -69,7 +69,7 @@ class Villain{
         let opposite = (this.heroy - this.y);
         let hypotopuse = Math.sqrt((this.herox - this.x) ** 2 + (this.heroy - this.y) ** 2);
         // let hypotopuse = (this.herox - this.x);
-        this.turnRate += Math.asin(opposite / hypotopuse)
+        this.turnRate += (Math.asin(opposite / hypotopuse) * (180 / Math.PI))
         // this.turnRate += Math.atan2(this.heroy, this.herox) * 180 / Math.PI;
         this.shootBullet();
     }

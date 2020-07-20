@@ -190,13 +190,13 @@ class Game {
 
     spottedHero() {
         for (let index = 0; index < this.villains.length; index++) {
-            const villain = this.villains[index];
-            if (villain.isHeroSpotted(this.hero.x, this.hero.y)) {
+            let villainObject = this.villains[index];
+            if (villainObject.isHeroSpotted(this.hero.x, this.hero.y)) {
                 // console.log("HERO SPOTTED")
-                villain.aggroFlying();
+                villainObject.aggroFlying();
 
             } else {
-                villain.regularFlying();
+                villainObject.regularFlying();
                 // console.log("NORMAL FLY")
     
             }
